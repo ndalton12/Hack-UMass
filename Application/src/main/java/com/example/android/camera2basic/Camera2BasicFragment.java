@@ -82,6 +82,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
@@ -98,9 +100,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import clarifai2.api.ClarifaiBuilder;
 import clarifai2.api.ClarifaiClient;
@@ -1037,8 +1047,105 @@ public class Camera2BasicFragment extends Fragment
             }
 
             Log.d(TAG, words.toString());
+
+            new CallbackTask().execute(dictionaryEntries(words));
         }
 
+    }
+
+    private static String dictionaryEntries(ArrayList<String> words) {
+        final String language = "en";
+        final String word;
+        if (words.get(1) == "no person") {
+            word = words.get(0);
+        } else {
+            word = words.get(1);
+        }
+        final String word_id = word.toLowerCase(); //word id is case sensitive and lowercase is required
+        return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id + "/sentences";
+    }
+
+    private static class CallbackTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            //TODO: replace with your own app id and app key
+            final String app_id = "56cf8138";
+            final String app_key = "76c48cc97938975a0709b3fdd7075080";
+            try {
+                URL url = new URL(params[0]);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                urlConnection.setRequestProperty("app_id",app_id);
+                urlConnection.setRequestProperty("app_key",app_key);
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            JSONObject response = null;
+
+            try {
+                response = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                System.out.println(response.get("results").toString());
+            } catch (JSONException e) {
+                System.out.println("oops");
+            }
+
+            String stringy = null;
+            try {
+                stringy = response.get("results").toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            int index1 = 0;
+            int index2 = 0;
+            Boolean flag = true;
+
+            for (int i = 0; i < stringy.length() - 5; i++) {
+                if (stringy.substring(i,i+4).equals("text") && flag) {
+                    System.out.println("success");
+                    index1 = i;
+                    flag = false;
+                }
+                if (!flag && stringy.charAt(i+7) == '\"') {
+                    index2 = i+7;
+                    break;
+                }
+            }
+
+            String output = stringy.substring(index1+7, index2);
+
+            // Manju come here, manjers output is the string
+            System.out.println(output);
+
+            //System.out.println(result);
+        }
     }
 
     /**
