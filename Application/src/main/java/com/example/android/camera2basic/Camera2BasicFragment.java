@@ -1065,10 +1065,10 @@ public class Camera2BasicFragment extends Fragment
     private static String dictionaryEntries(ArrayList<String> words) {
         final String language = "en";
         final String word;
-        if (words.get(1) == "no person") {
-            word = words.get(0);
-        } else {
+        if (words.get(0).equals("no person")) {
             word = words.get(1);
+        } else {
+            word = words.get(0);
         }
         final String word_id = word.toLowerCase(); //word id is case sensitive and lowercase is required
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id + "/sentences";
