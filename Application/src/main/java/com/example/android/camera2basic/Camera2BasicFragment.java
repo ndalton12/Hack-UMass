@@ -20,13 +20,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -39,16 +44,22 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
+import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.EventLogTags;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -59,17 +70,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
+import clarifai2.api.ClarifaiBuilder;
+import clarifai2.api.ClarifaiClient;
+import clarifai2.dto.input.ClarifaiInput;
+import clarifai2.dto.model.output.ClarifaiOutput;
+import clarifai2.dto.prediction.Concept;
 
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -80,6 +117,11 @@ public class Camera2BasicFragment extends Fragment
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+
+    /*public static final String subscriptionKey = "9ed6e07f85a4447da8820826cb8a022d";
+    public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
+    VisionServiceClient client = new VisionServiceRestClient(subscriptionKey);
+    private Bitmap mBitmap;*/
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -244,6 +286,7 @@ public class Camera2BasicFragment extends Fragment
         @Override
         public void onImageAvailable(ImageReader reader) {
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+
         }
 
     };
@@ -344,6 +387,7 @@ public class Camera2BasicFragment extends Fragment
                                        @NonNull CaptureRequest request,
                                        @NonNull TotalCaptureResult result) {
             process(result);
+
         }
 
     };
@@ -565,9 +609,9 @@ public class Camera2BasicFragment extends Fragment
                 // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
                 // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
                 // garbage capture data.
-                mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
+                mPreviewSize = new Size(2560, 1575);/*chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
                         rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
-                        maxPreviewHeight, largest);
+                        maxPreviewHeight, largest);*/
 
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
                 int orientation = getResources().getConfiguration().orientation;
@@ -838,12 +882,35 @@ public class Camera2BasicFragment extends Fragment
                     showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
+
+                    /*ClarifaiClient client = new ClarifaiBuilder("dc525a17969e45a99137e132cba945fa").buildSync();
+                    final List<ClarifaiOutput<Concept>> predictionResults =
+                            client.getDefaultModels().generalModel() // You can also do client.getModelByID("id") to get your custom models
+                                    .predict()
+                                    .withInputs(
+                                            ClarifaiInput.forImage(mFile))
+                                    .executeSync()
+                                    .get();
+                    Log.d(TAG, predictionResults.toString());
+                    Log.d(TAG, predictionResults.get(0).data().get(0).name());
+
+                    ArrayList<String> words = new ArrayList<String>();
+
+                    for (int i = 0; i < predictionResults.get(0).data().size(); i++) {
+                        words.add(predictionResults.get(0).data().get(i).name());
+                    }
+
+                    Log.d(TAG, words.toString());*/
+
+
                 }
             };
 
             mCaptureSession.stopRepeating();
             mCaptureSession.abortCaptures();
             mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
+
+
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -951,6 +1018,25 @@ public class Camera2BasicFragment extends Fragment
                     }
                 }
             }
+
+            ClarifaiClient client = new ClarifaiBuilder("dc525a17969e45a99137e132cba945fa").buildSync();
+            final List<ClarifaiOutput<Concept>> predictionResults =
+                    client.getDefaultModels().generalModel() // You can also do client.getModelByID("id") to get your custom models
+                            .predict()
+                            .withInputs(
+                                    ClarifaiInput.forImage(mFile))
+                            .executeSync()
+                            .get();
+            Log.d(TAG, predictionResults.toString());
+            Log.d(TAG, predictionResults.get(0).data().get(0).name());
+
+            ArrayList<String> words = new ArrayList<String>();
+
+            for (int i = 0; i < predictionResults.get(0).data().size(); i++) {
+                words.add(predictionResults.get(0).data().get(i).name());
+            }
+
+            Log.d(TAG, words.toString());
         }
 
     }
