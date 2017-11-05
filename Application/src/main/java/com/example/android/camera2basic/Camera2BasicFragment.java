@@ -28,6 +28,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -905,27 +906,6 @@ public class Camera2BasicFragment extends Fragment
                     showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
-
-                    /*ClarifaiClient client = new ClarifaiBuilder("dc525a17969e45a99137e132cba945fa").buildSync();
-                    final List<ClarifaiOutput<Concept>> predictionResults =
-                            client.getDefaultModels().generalModel() // You can also do client.getModelByID("id") to get your custom models
-                                    .predict()
-                                    .withInputs(
-                                            ClarifaiInput.forImage(mFile))
-                                    .executeSync()
-                                    .get();
-                    Log.d(TAG, predictionResults.toString());
-                    Log.d(TAG, predictionResults.get(0).data().get(0).name());
-
-                    ArrayList<String> words = new ArrayList<String>();
-
-                    for (int i = 0; i < predictionResults.get(0).data().size(); i++) {
-                        words.add(predictionResults.get(0).data().get(i).name());
-                    }
-
-                    Log.d(TAG, words.toString());*/
-
-
                 }
             };
 
@@ -1241,8 +1221,13 @@ public class Camera2BasicFragment extends Fragment
 
         ConvertTextToSpeech();
 
-        System.out.println("asdfasdfasdf");
+        Toast toast = new Toast(getContext());
+        toast.setGravity(Gravity.TOP|Gravity.LEFT,0,0);
 
+        for (int i=0; i < 6; i++)
+        {
+            toast.makeText(getContext(), finalOutput, toast.LENGTH_LONG ).show();
+        }
         return finalOutput;
     }
 
