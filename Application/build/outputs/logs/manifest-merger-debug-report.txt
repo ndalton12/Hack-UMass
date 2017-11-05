@@ -1,108 +1,108 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:18:1-41:12
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:18:1-42:12
 	package
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:19:5-47
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:19:5-47
 	xmlns:android
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:18:11-69
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:18:11-69
 uses-permission#android.permission.CAMERA
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:21:5-65
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:21:5-65
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:21:22-62
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:21:22-62
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:22:5-67
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:22:5-67
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:22:22-64
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:22:22-64
 uses-feature#android.hardware.camera
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:24:5-60
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:25:5-60
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:24:19-57
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:25:19-57
 uses-feature#android.hardware.camera.autofocus
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:25:5-70
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:26:5-70
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:25:19-67
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:26:19-67
 application
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:27:5-39:19
-MERGED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Niall\.android\build-cache\82ca768fdcc85de86a1025f4b9b2f342ae8b3002\output\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Niall\.android\build-cache\3637faf77de1dd0274bbf945c0868ba36870c644\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Niall\.android\build-cache\c28ab2ce7c4390c33ebec52685612fba88724288\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Niall\.android\build-cache\0ca69b7f02a7469ceb49c816d2fac275447b571c\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Niall\.android\build-cache\b5c38510f1f15cce34832a9e25a3ba403df27195\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Niall\.android\build-cache\5309778078d4f70845ec755cd862719f3d3dd997\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\aba605b1061eae46a87349fd786125d26d71de50\output\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\0b475a2c45c622d59fc5a25cae312d25fc1a906d\output\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Niall\.android\build-cache\0f5eb34d773ab0106aaf324923d5c2971137601c\output\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Niall\.android\build-cache\846decd7e05cfac5cb7d1dca2ac5a3548e77f8a8\output\AndroidManifest.xml:25:5-29:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Niall\.android\build-cache\6991f4e0cc23cbe0ec5dbd443ffcfba3ef4aa615\output\AndroidManifest.xml:24:5-28:19
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:28:5-40:19
+MERGED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\27eb9c368fd4a4006f2a5367e47ee1ba67fb285d\output\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\4a52b8ca7eed04ecad559f554883a4123890310e\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\1d39c047575e6447b1d95d3f099ddbdf15e5ce01\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\351e9ffb69b7b7ccad7a1df1d62b0c2fb01b13ef\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\57f7555283a2225a313b62ed320ac8d4d1e4580b\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\440c31fe495b4248838e09b90c54f1529252c7f8\output\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\7784d7dfec379283daa8d76b465d2b8965a40fb8\output\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\53098ecb31224a1b47557bc156826de5a1c74e64\output\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\20eaacd9578c5856040b1a91f28c9bae723ad344\output\AndroidManifest.xml:25:5-29:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Manjusha Chava\.android\build-cache\7e695201e13d9f40a2d7f0715044a2a067cb4885\output\AndroidManifest.xml:24:5-28:19
 	android:label
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:28:9-41
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:29:9-41
 	android:allowBackup
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:27:18-44
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:28:18-44
 	android:icon
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:29:9-45
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:30:9-45
 	android:theme
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:30:9-45
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:31:9-45
 activity#com.example.android.camera2basic.CameraActivity
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:32:9-38:20
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:33:9-39:20
 	android:label
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:33:19-51
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:34:19-51
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:32:19-49
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:33:19-49
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:34:13-37:29
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:35:13-38:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:35:17-69
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:36:17-69
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:35:25-66
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:36:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:36:17-77
+ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:37:17-77
 	android:name
-		ADDED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml:36:27-74
+		ADDED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml:37:27-74
 uses-sdk
-INJECTED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:21:5-23:55
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Niall\.android\build-cache\82ca768fdcc85de86a1025f4b9b2f342ae8b3002\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Niall\.android\build-cache\3637faf77de1dd0274bbf945c0868ba36870c644\output\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Niall\.android\build-cache\c28ab2ce7c4390c33ebec52685612fba88724288\output\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Niall\.android\build-cache\0ca69b7f02a7469ceb49c816d2fac275447b571c\output\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Niall\.android\build-cache\b5c38510f1f15cce34832a9e25a3ba403df27195\output\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Niall\.android\build-cache\5309778078d4f70845ec755cd862719f3d3dd997\output\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\aba605b1061eae46a87349fd786125d26d71de50\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\0b475a2c45c622d59fc5a25cae312d25fc1a906d\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Niall\.android\build-cache\0f5eb34d773ab0106aaf324923d5c2971137601c\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Niall\.android\build-cache\846decd7e05cfac5cb7d1dca2ac5a3548e77f8a8\output\AndroidManifest.xml:21:5-23:58
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Niall\.android\build-cache\6991f4e0cc23cbe0ec5dbd443ffcfba3ef4aa615\output\AndroidManifest.xml:20:5-22:41
-MERGED from [com.microsoft.projectoxford:vision:0.5.0] C:\Users\Niall\.android\build-cache\192ea25babdca1c56bbe78e04bf9ae7dc06592bb\output\AndroidManifest.xml:5:5-7:41
+INJECTED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:21:5-23:55
+MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\27eb9c368fd4a4006f2a5367e47ee1ba67fb285d\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\4a52b8ca7eed04ecad559f554883a4123890310e\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\1d39c047575e6447b1d95d3f099ddbdf15e5ce01\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\351e9ffb69b7b7ccad7a1df1d62b0c2fb01b13ef\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\57f7555283a2225a313b62ed320ac8d4d1e4580b\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\440c31fe495b4248838e09b90c54f1529252c7f8\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\7784d7dfec379283daa8d76b465d2b8965a40fb8\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\53098ecb31224a1b47557bc156826de5a1c74e64\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\20eaacd9578c5856040b1a91f28c9bae723ad344\output\AndroidManifest.xml:21:5-23:58
+MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Manjusha Chava\.android\build-cache\7e695201e13d9f40a2d7f0715044a2a067cb4885\output\AndroidManifest.xml:20:5-22:41
+MERGED from [com.microsoft.projectoxford:vision:0.5.0] C:\Users\Manjusha Chava\.android\build-cache\01081d34ed56fb33c88d97a47c941ca3d1ecaf39\output\AndroidManifest.xml:5:5-7:41
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:23:9-52
+		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:23:9-52
 	android:targetSdkVersion
-		INJECTED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Niall\Documents\InfoPic\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\Application\src\main\AndroidManifest.xml
 meta-data#android.support.VERSION
-ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Niall\.android\build-cache\82ca768fdcc85de86a1025f4b9b2f342ae8b3002\output\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Niall\.android\build-cache\3637faf77de1dd0274bbf945c0868ba36870c644\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Niall\.android\build-cache\c28ab2ce7c4390c33ebec52685612fba88724288\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Niall\.android\build-cache\0ca69b7f02a7469ceb49c816d2fac275447b571c\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Niall\.android\build-cache\b5c38510f1f15cce34832a9e25a3ba403df27195\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Niall\.android\build-cache\5309778078d4f70845ec755cd862719f3d3dd997\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\aba605b1061eae46a87349fd786125d26d71de50\output\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Niall\.android\build-cache\0b475a2c45c622d59fc5a25cae312d25fc1a906d\output\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Niall\.android\build-cache\0f5eb34d773ab0106aaf324923d5c2971137601c\output\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Niall\.android\build-cache\846decd7e05cfac5cb7d1dca2ac5a3548e77f8a8\output\AndroidManifest.xml:26:9-28:38
+ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\27eb9c368fd4a4006f2a5367e47ee1ba67fb285d\output\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\4a52b8ca7eed04ecad559f554883a4123890310e\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\1d39c047575e6447b1d95d3f099ddbdf15e5ce01\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\351e9ffb69b7b7ccad7a1df1d62b0c2fb01b13ef\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\57f7555283a2225a313b62ed320ac8d4d1e4580b\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\440c31fe495b4248838e09b90c54f1529252c7f8\output\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\7784d7dfec379283daa8d76b465d2b8965a40fb8\output\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\53098ecb31224a1b47557bc156826de5a1c74e64\output\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\20eaacd9578c5856040b1a91f28c9bae723ad344\output\AndroidManifest.xml:26:9-28:38
 	android:value
-		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:28:13-35
+		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:28:13-35
 	android:name
-		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Niall\.android\build-cache\47630666a9fff44c155730c1429be8227746e944\output\AndroidManifest.xml:27:13-51
+		ADDED from [com.android.support:support-v13:26.1.0] C:\Users\Manjusha Chava\.android\build-cache\228f4d5ac51273d21b93aa656478c23dc7528abb\output\AndroidManifest.xml:27:13-51
 meta-data#android.arch.lifecycle.VERSION
-ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Niall\.android\build-cache\6991f4e0cc23cbe0ec5dbd443ffcfba3ef4aa615\output\AndroidManifest.xml:25:9-27:47
+ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Manjusha Chava\.android\build-cache\7e695201e13d9f40a2d7f0715044a2a067cb4885\output\AndroidManifest.xml:25:9-27:47
 	android:value
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Niall\.android\build-cache\6991f4e0cc23cbe0ec5dbd443ffcfba3ef4aa615\output\AndroidManifest.xml:27:13-44
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Manjusha Chava\.android\build-cache\7e695201e13d9f40a2d7f0715044a2a067cb4885\output\AndroidManifest.xml:27:13-44
 	android:name
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Niall\.android\build-cache\6991f4e0cc23cbe0ec5dbd443ffcfba3ef4aa615\output\AndroidManifest.xml:26:13-58
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Manjusha Chava\.android\build-cache\7e695201e13d9f40a2d7f0715044a2a067cb4885\output\AndroidManifest.xml:26:13-58
 library
-ADDED from [com.microsoft.projectoxford:vision:0.5.0] C:\Users\Niall\.android\build-cache\192ea25babdca1c56bbe78e04bf9ae7dc06592bb\output\AndroidManifest.xml:9:5-16
+ADDED from [com.microsoft.projectoxford:vision:0.5.0] C:\Users\Manjusha Chava\.android\build-cache\01081d34ed56fb33c88d97a47c941ca3d1ecaf39\output\AndroidManifest.xml:9:5-16

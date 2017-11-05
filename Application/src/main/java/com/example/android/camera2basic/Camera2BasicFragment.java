@@ -53,6 +53,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -63,11 +64,14 @@ import android.util.EventLogTags;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -117,6 +121,9 @@ import clarifai2.api.ClarifaiClient;
 import clarifai2.dto.input.ClarifaiInput;
 import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.prediction.Concept;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -127,6 +134,8 @@ public class Camera2BasicFragment extends Fragment
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+    public static String FINALURL;
+    private static OkHttpClient client = new OkHttpClient();
 
     /*public static final String subscriptionKey = "9ed6e07f85a4447da8820826cb8a022d";
     public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
@@ -1141,13 +1150,70 @@ public class Camera2BasicFragment extends Fragment
 
             String output = stringy.substring(index1+7, index2);
 
-            // Manju come here, manjers output is the string
-            System.out.println(output);
+            translate(output);
 
-            //System.out.println(result);
+            System.out.println(output);
         }
     }
 
+    private static void translate(String primaryOutput){
+        Log.d("YodaSpeak", "Entered Translate Button");
+        Log.d("YodaSpeak", "final URL: " + FINALURL);
+
+        Log.d("YodaSpeak", "Entered OnClick");
+
+        Log.d("YodaSpeak", primaryOutput);
+
+        //replace whitespace with "+"
+        primaryOutput = primaryOutput.replaceAll(" ","%20");
+
+        String key = "BcQrart5N9mshQyltELRTb5O9epjp1xnynA";
+        String url = "http://api.funtranslations.com/translate/yoda.json?text=";
+
+        //concat url and userInput
+        FINALURL = url + primaryOutput;
+        Log.d("YodaSpeak", FINALURL);
+
+        try {
+            getUserData(FINALURL);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static String getUserData(String url) throws JSONException, IOException {
+
+        String json = null;
+        json = getJSON(url);
+        Log.d("YodaSpeak", url);
+
+        System.out.println(json);
+
+        JSONObject job = new JSONObject(json);
+        JSONObject job2 = new JSONObject(job.getString("contents"));
+
+        System.out.println(job.getString("contents"));
+
+        //THIS IS THE FINAL THING OMG OMG OMG YAY IM SO HAPPY
+        String finalOutput = job2.getString("translated");
+        System.out.println(finalOutput);
+
+        return finalOutput;
+    }
+
+    public static String getJSON(String url) throws IOException {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
     /**
      * Compares two {@code Size}s based on their areas.
      */
