@@ -55,6 +55,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
@@ -104,6 +105,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Semaphore;
@@ -136,6 +138,8 @@ public class Camera2BasicFragment extends Fragment
     private static final String FRAGMENT_DIALOG = "dialog";
     public static String FINALURL;
     private static OkHttpClient client = new OkHttpClient();
+    private static TextToSpeech tts;
+    private static String finalText;
 
     /*public static final String subscriptionKey = "9ed6e07f85a4447da8820826cb8a022d";
     public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
@@ -1000,7 +1004,7 @@ public class Camera2BasicFragment extends Fragment
     /**
      * Saves a JPEG {@link Image} into the specified {@link File}.
      */
-    private static class ImageSaver implements Runnable {
+    private class ImageSaver implements Runnable {
 
         /**
          * The JPEG image
@@ -1074,7 +1078,7 @@ public class Camera2BasicFragment extends Fragment
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id + "/sentences";
     }
 
-    private static class CallbackTask extends AsyncTask<String, Integer, String> {
+    private class CallbackTask extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -1150,13 +1154,31 @@ public class Camera2BasicFragment extends Fragment
 
             String output = stringy.substring(index1+7, index2);
 
+            finalText = output;
+
+            /*tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+
+                @Override
+                public void onInit(int status) {
+
+                    if (status == TextToSpeech.SUCCESS){
+                        tts.setLanguage(Locale.US);
+                        ConvertTextToSpeech();
+                    }
+                    else
+                        Log.e("error", "Initialization Failed!");
+                }
+            });*/
+
+            //ConvertTextToSpeech();
+
             translate(output);
 
-            System.out.println(output);
+            //System.out.println(output);
         }
     }
 
-    private static void translate(String primaryOutput){
+    private void translate(String primaryOutput){
         Log.d("YodaSpeak", "Entered Translate Button");
         Log.d("YodaSpeak", "final URL: " + FINALURL);
 
@@ -1184,7 +1206,7 @@ public class Camera2BasicFragment extends Fragment
     }
 
 
-    public static String getUserData(String url) throws JSONException, IOException {
+    public String getUserData(String url) throws JSONException, IOException {
 
         String json = null;
         json = getJSON(url);
@@ -1198,10 +1220,37 @@ public class Camera2BasicFragment extends Fragment
         System.out.println(job.getString("contents"));
 
         //THIS IS THE FINAL THING OMG OMG OMG YAY IM SO HAPPY
-        String finalOutput = job2.getString("translated");
+        final String finalOutput = job2.getString("translated");
         System.out.println(finalOutput);
 
+        finalText = finalOutput;
+
+        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+
+                if (status == TextToSpeech.SUCCESS){
+                    tts.setLanguage(Locale.US);
+                    ConvertTextToSpeech();
+                }
+                else
+                    Log.e("error", "Initialization Failed!");
+            }
+        });
+
+        ConvertTextToSpeech();
+
+        System.out.println("asdfasdfasdf");
+
         return finalOutput;
+    }
+
+    public void ConvertTextToSpeech() {
+        if(finalText==null||"".equals(finalText))
+            finalText = "Text Conversion to Speech no work";
+        System.out.println("Speaking");
+        tts.speak(finalText, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     public static String getJSON(String url) throws IOException {

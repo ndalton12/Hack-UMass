@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Niall\\Documents\\InfoPic\\Application\\build\\intermediates\\res\\merged\\debug\\layout-land\\fragment_camera2_basic.xml",
+        "source": "C:\\Users\\Niall\\Documents\\InfoPic\\Application\\src\\main\\res\\layout-land\\fragment_camera2_basic.xml"
+    },
+    {
         "merged": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\res\\merged\\debug\\layout-land\\fragment_camera2_basic.xml",
         "source": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\src\\main\\res\\layout-land\\fragment_camera2_basic.xml"
     }
