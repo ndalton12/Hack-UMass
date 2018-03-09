@@ -33,14 +33,16 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/texture"
-        android:background="@color/control_background"
+        android:background="#526524"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:src="@drawable/yoda_camera"
+            style="@android:style/Widget.Material.Light.Button.Borderless"
             android:text="@string/picture" />
 
         <ImageButton

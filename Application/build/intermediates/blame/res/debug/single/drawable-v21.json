@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\Manjusha Chava\\.android\\build-cache\\20eaacd9578c5856040b1a91f28c9bae723ad344\\output\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
         "merged": "C:\\Users\\Niall\\Documents\\InfoPic\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\notification_action_background.xml",
         "source": "C:\\Users\\Niall\\.android\\build-cache\\846decd7e05cfac5cb7d1dca2ac5a3548e77f8a8\\output\\res\\drawable-v21\\notification_action_background.xml"
     },
@@ -12,7 +16,19 @@
         "source": "C:\\Users\\Niall\\.android\\build-cache\\3637faf77de1dd0274bbf945c0868ba36870c644\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
     {
+        "merged": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\Manjusha Chava\\.android\\build-cache\\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
         "merged": "C:\\Users\\Niall\\Documents\\InfoPic\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_edit_text_material.xml",
         "source": "C:\\Users\\Niall\\.android\\build-cache\\3637faf77de1dd0274bbf945c0868ba36870c644\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\Manjusha Chava\\.android\\build-cache\\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\\output\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\Manjusha Chava\\.android\\build-cache\\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
     }
 ]

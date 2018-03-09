@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Application/Application.iml" filepath="$PROJECT_DIR$/Application/Application.iml" />
-      <module fileurl="file://$PROJECT_DIR$/InfoPic.iml" filepath="$PROJECT_DIR$/InfoPic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hack-UMass.iml" filepath="$PROJECT_DIR$/Hack-UMass.iml" />
+      <module fileurl="file://C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\InfoPic.iml" filepath="C:\Users\Manjusha Chava\AndroidStudioProjects\Hack-UMass\InfoPic.iml" />
     </modules>
   </component>
 </project>

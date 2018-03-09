@@ -1,5 +1,29 @@
 [
     {
+        "outputFile": "C:\\Users\\Manjusha Chava\\AndroidStudioProjects\\Hack-UMass\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 112,
+                    "endOffset": 163
+                },
+                "from": {
+                    "file": "C:\\Users\\Manjusha Chava\\.android\\build-cache\\d79b8fb2eb9125f5383f3f7eda2eb095040ec3b8\\output\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 112,
+                        "endOffset": 163
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "C:\\Users\\Niall\\Documents\\InfoPic\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
         "map": [
             {

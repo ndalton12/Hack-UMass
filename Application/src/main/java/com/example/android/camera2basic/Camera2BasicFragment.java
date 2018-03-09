@@ -20,13 +20,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -39,37 +45,88 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
+import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.EventLogTags;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import clarifai2.api.ClarifaiBuilder;
+import clarifai2.api.ClarifaiClient;
+import clarifai2.dto.input.ClarifaiInput;
+import clarifai2.dto.model.output.ClarifaiOutput;
+import clarifai2.dto.prediction.Concept;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -80,6 +137,15 @@ public class Camera2BasicFragment extends Fragment
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
+    public static String FINALURL;
+    private static OkHttpClient client = new OkHttpClient();
+    private static TextToSpeech tts;
+    private static String finalText;
+
+    /*public static final String subscriptionKey = "9ed6e07f85a4447da8820826cb8a022d";
+    public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
+    VisionServiceClient client = new VisionServiceRestClient(subscriptionKey);
+    private Bitmap mBitmap;*/
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -244,6 +310,7 @@ public class Camera2BasicFragment extends Fragment
         @Override
         public void onImageAvailable(ImageReader reader) {
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+
         }
 
     };
@@ -344,6 +411,7 @@ public class Camera2BasicFragment extends Fragment
                                        @NonNull CaptureRequest request,
                                        @NonNull TotalCaptureResult result) {
             process(result);
+
         }
 
     };
@@ -565,9 +633,9 @@ public class Camera2BasicFragment extends Fragment
                 // Danger, W.R.! Attempting to use too large a preview size could  exceed the camera
                 // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
                 // garbage capture data.
-                mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
+                mPreviewSize = new Size(2560, 1575);/*chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
                         rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
-                        maxPreviewHeight, largest);
+                        maxPreviewHeight, largest);*/
 
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
                 int orientation = getResources().getConfiguration().orientation;
@@ -844,6 +912,8 @@ public class Camera2BasicFragment extends Fragment
             mCaptureSession.stopRepeating();
             mCaptureSession.abortCaptures();
             mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
+
+
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -914,7 +984,7 @@ public class Camera2BasicFragment extends Fragment
     /**
      * Saves a JPEG {@link Image} into the specified {@link File}.
      */
-    private static class ImageSaver implements Runnable {
+    private class ImageSaver implements Runnable {
 
         /**
          * The JPEG image
@@ -951,10 +1021,233 @@ public class Camera2BasicFragment extends Fragment
                     }
                 }
             }
+
+            ClarifaiClient client = new ClarifaiBuilder("dc525a17969e45a99137e132cba945fa").buildSync();
+            final List<ClarifaiOutput<Concept>> predictionResults =
+                    client.getDefaultModels().generalModel() // You can also do client.getModelByID("id") to get your custom models
+                            .predict()
+                            .withInputs(
+                                    ClarifaiInput.forImage(mFile))
+                            .executeSync()
+                            .get();
+            Log.d(TAG, predictionResults.toString());
+            Log.d(TAG, predictionResults.get(0).data().get(0).name());
+
+            ArrayList<String> words = new ArrayList<String>();
+
+            for (int i = 0; i < predictionResults.get(0).data().size(); i++) {
+                words.add(predictionResults.get(0).data().get(i).name());
+            }
+
+            Log.d(TAG, words.toString());
+
+            new CallbackTask().execute(dictionaryEntries(words));
         }
 
     }
 
+    private static String dictionaryEntries(ArrayList<String> words) {
+        final String language = "en";
+        final String word;
+        if (words.get(0).equals("no person")) {
+            word = words.get(1);
+        } else {
+            word = words.get(0);
+        }
+        final String word_id = word.toLowerCase(); //word id is case sensitive and lowercase is required
+        return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id + "/sentences";
+    }
+
+    private class CallbackTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            //TODO: replace with your own app id and app key
+            final String app_id = "56cf8138";
+            final String app_key = "76c48cc97938975a0709b3fdd7075080";
+            try {
+                URL url = new URL(params[0]);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                urlConnection.setRequestProperty("app_id",app_id);
+                urlConnection.setRequestProperty("app_key",app_key);
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            JSONObject response = null;
+
+            try {
+                response = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                System.out.println(response.get("results").toString());
+            } catch (JSONException e) {
+                System.out.println("oops");
+            }
+
+            String stringy = null;
+            try {
+                stringy = response.get("results").toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            int index1 = 0;
+            int index2 = 0;
+            Boolean flag = true;
+
+            for (int i = 0; i < stringy.length() - 5; i++) {
+                if (stringy.substring(i,i+4).equals("text") && flag) {
+                    System.out.println("success");
+                    index1 = i;
+                    flag = false;
+                }
+                if (!flag && stringy.charAt(i+7) == '\"') {
+                    index2 = i+7;
+                    break;
+                }
+            }
+
+            String output = stringy.substring(index1+7, index2);
+
+            finalText = output;
+
+            /*tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+
+                @Override
+                public void onInit(int status) {
+
+                    if (status == TextToSpeech.SUCCESS){
+                        tts.setLanguage(Locale.US);
+                        ConvertTextToSpeech();
+                    }
+                    else
+                        Log.e("error", "Initialization Failed!");
+                }
+            });*/
+
+            //ConvertTextToSpeech();
+
+            translate(output);
+
+            //System.out.println(output);
+        }
+    }
+
+    private void translate(String primaryOutput){
+        Log.d("YodaSpeak", "Entered Translate Button");
+        Log.d("YodaSpeak", "final URL: " + FINALURL);
+
+        Log.d("YodaSpeak", "Entered OnClick");
+
+        Log.d("YodaSpeak", primaryOutput);
+
+        //replace whitespace with "+"
+        primaryOutput = primaryOutput.replaceAll(" ","%20");
+
+        String key = "BcQrart5N9mshQyltELRTb5O9epjp1xnynA";
+        String url = "http://api.funtranslations.com/translate/yoda.json?text=";
+
+        //concat url and userInput
+        FINALURL = url + primaryOutput;
+        Log.d("YodaSpeak", FINALURL);
+
+        try {
+            getUserData(FINALURL);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public String getUserData(String url) throws JSONException, IOException {
+
+        String json = null;
+        json = getJSON(url);
+        Log.d("YodaSpeak", url);
+
+        System.out.println(json);
+
+        JSONObject job = new JSONObject(json);
+        JSONObject job2 = new JSONObject(job.getString("contents"));
+
+        System.out.println(job.getString("contents"));
+
+        //THIS IS THE FINAL THING OMG OMG OMG YAY IM SO HAPPY
+        final String finalOutput = job2.getString("translated");
+        System.out.println(finalOutput);
+
+        finalText = finalOutput;
+
+        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+
+                if (status == TextToSpeech.SUCCESS){
+                    tts.setLanguage(Locale.US);
+                    ConvertTextToSpeech();
+                }
+                else
+                    Log.e("error", "Initialization Failed!");
+            }
+        });
+
+        ConvertTextToSpeech();
+
+        Toast toast = new Toast(getContext());
+        toast.setGravity(Gravity.TOP|Gravity.LEFT,0,0);
+
+        for (int i=0; i < 6; i++)
+        {
+            toast.makeText(getContext(), finalOutput, toast.LENGTH_LONG ).show();
+        }
+        return finalOutput;
+    }
+
+    public void ConvertTextToSpeech() {
+        if(finalText==null||"".equals(finalText))
+            finalText = "Text Conversion to Speech no work";
+        System.out.println("Speaking");
+        tts.speak(finalText, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    public static String getJSON(String url) throws IOException {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
     /**
      * Compares two {@code Size}s based on their areas.
      */
